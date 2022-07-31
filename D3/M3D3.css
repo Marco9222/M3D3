@@ -1,0 +1,17 @@
+body{
+    background-color: aliceblue;
+}
+
+.myimg{
+    object-fit: cover; 
+    height:100%; 
+    width:100%;
+}
+
+.mostra{
+    display:none;
+}
+
+button:hover{
+   color:blue;
+}

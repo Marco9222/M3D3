@@ -1,0 +1,708 @@
+<!-- Crea una pagina responsive per mostrarci i tuoi album musicali preferiti.
+
+In questa pagina ci sarà una tua piccola biografia, i migliori album della tua vita, 
+i peggiori che hai mai sentito, 
+e qualsiasi altra cosa relativa alla musica che ami.
+
+
+REGOLE:
+
+Il progetto dev'essere caricato in una nuova repository su GitHub e linkata al tuo Docente.
+Puoi usare Google / StackOverflow, MA ti suggeriamo caldamente di riferirti 
+principalmente alla documentazione fornita, 
+per non perderti in ricerche infruttuose per troppo tempo.
+
+Prova il tuo lavoro su varie risoluzioni di schermo, ingrandendo e 
+rimpicciolendo la finestra, 
+e soprattutto usando i developer tools del browser che forniscono 
+l'emulatore di svariati device sul quale potrai vedere 
+esattamente come si comporta il tuo layout.
+
+Usa le classi di Bootstrap 4.6 per creare la griglia responsive quando necessario.
+Usa container > row > col in questo ordine per ottenere un layout responsive perfetto.
+
+NOTE:
+Non c'è una design preciso da seguire, dai sfogo alla tua creatività. L'unica cosa importante è che sia responsive!
+Fai qualche ricerca nel web per trarre ispirazione su come rappresentare un progetto musicale con svariate copertine di dischi.
+Può essere simile ad Amazon Music, Spotify, o Apple Music, o qualsiasi altra collezione di dischi là fuori nel world wide web.
+
+CONSIGLIO: Concentrati sulla struttura e la responsività prima, 
+quando quella funziona puoi dedicarti alla parte grafica e di dettaglio.
+
+ESERCIZI:
+
+1) Andrai a creare un componente per rappresentare la carta del tuo album, che riutilizzerai in tutto il progetto. 
+Bootstrap ti dà disponibili alcuni componenti per card e immagini. 
+Puoi scegliere di partire da quelli e modificarli, oppure partire da zero e creare i tuoi componenti via CSS. Gli elementi necessari sono:  
+
+L'elemento Card
+L'immagine di copertina dell'album
+Il titolo dell'album
+Il gruppo / artista / dj dell'album
+Il genere dell'album
+La durata dell'album
+
+NB: Assicurati di applicare le stesse regole di stile a tutti i componenti album che userai nella pagina per mantenere la coerenza 
+degli elementi e degli stili.
+
+2)  Implementa una navigation bar usando il componente boostrap apposito.
+     Questa navigazione dovrà linkare ogni sezione nella tua pagina.
+
+3) Crea una sezione responsive per i tuoi album preferiti.
+     In questa sezione dovrai avere:
+
+4 album per linea quando lo schermo è molto grande
+3 album per linea quando lo schermo ha una dimensione intermedia (tablet o simili)
+2 album per linea qunado lo schermo è molto piccolo (mobile)
+
+4) Crea una sezione per le recensioni degli album.
+      Prendi un album che ti piace molto e crea una sezione con:
+
+Una grande immagine di copertina
+Titolo
+Band
+Durata
+Genere
+Tracce dell'album ( in una tabella. Trovala tra i componenti Bootstrap ) 
+... e qualsiasi cosa ti venga in mente di interessante che lo riguardi!
+
+5) La lista dei peggiori album mai sentiti! Seleziona gli album che davvero non sopporti
+ o qualcosa che pensi sia sopravvalutato e inseriscilo nella "hall of shame" in forma di tabella!
+
+6) Tutte copertine! Tappezza una sezione di copertine di album. Solo immagini in un layout a griglia senza spazi fra di loro, 
+con le immagini alla stessa altezza. Inserisci almeno 20 immagini per avere un bell'effetto.
+
+EXTRA) Aggiungi un bottone ad ogni sezione, cliccandolo 
+il corpo della sezione dovrà apparire (se nascosto) o nascondersi (se visibile).
+
+SUGGERIMENTO: vedi se esiste un componente Bootstrap che faccia al caso tuo. 
+Se non dovessi trovarlo puoi sempre raggiungere lo stesso effetto usando la normale manipolazione del DOM 
+
+EXTRA) Aggiungi nel footer, al momento del caricamento della pagina, il numero di album presenti nella pagina.
+-->
+
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Bootstrap</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+     <link rel="stylesheet" href="M3D3.css">
+     </head>
+
+<body>
+
+     <h1 class="display-20 fw-bold text-center">Album musicali: il meglio ed il peggio</h1>
+     <p class="text-center">Una lista dei migliori (e peggiori) album musicali... secondo Marco Dal Tin</p>
+
+     <!--SEZIONE NAVBAR-->
+
+     <nav class="navbar navbar-expand-lg bg-light">
+
+          <div class="container-fluid">
+               <p class="navbar-brand" href="#">Naviga nel sito</p>
+
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+               </button>
+
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                         <li class="nav-item">
+                              <a style="margin:5px;" class="btn btn-primary" href="#first">I migliori album</a>
+                         </li>
+
+                         <li class="nav-item">
+                              <a style="margin:5px;" class="btn btn-primary" href="#second">Recensione Best album</a>
+                         </li>
+
+                         <li class="nav-item">
+                              <a  style="margin:5px;" class="btn btn-primary" href="#third">Hall of Shame</a>
+                         </li>
+
+                         <li class="nav-item">
+                              <a style="margin:5px;" class="btn btn-primary" href="#fourth">I più ascoltati</a>
+                         </li>
+                         
+                    </ul>
+
+                    <!-- <form class="d-flex" role="search">
+                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                         <button class="btn btn-outline-success" type="submit">Cerca</button>
+                    </form> -->
+               </div>
+          </div>
+
+     </nav>
+
+     <br>
+     <br>
+
+     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+               <a class="navbar-brand" href="#">Navbar</a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                         <li class="nav-item">
+                              <a class="nav-link" href="#first-section">First section</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#second-section">Second section</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#third-section">Third section</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#fourth-section">Fourth section</a>
+                         </li>
+                    </ul>
+               </div>
+          </div>
+     </nav>
+
+     
+     <div id="first-section">First section</div>
+     <div id="second-section">Second section</div>
+     <div id="third-section">Third section</div>
+     <div id="fourth-section">Fourth section</div> -->
+
+
+     <!--SEZIONE ALBUM PREFERITI-->
+
+     <button class="btn btn-primary" onclick="mostra1()" style="width:100%">I migliori album</button>
+
+     <!-- <a href="#first" data-toggle="collapse">Collapsible</a> -->
+
+     <div class="container text-center mostra" id="first">
+          <h1>I migliori album</h1>
+          <br>
+          <br>
+
+          <div class="row">
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="piece-of-mind.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Piece of mind</h5>
+                              <h6>Iron Maiden</h6>
+                              <p class="card-text">Heavy Metal</p>
+                              <p class="card-text">45:51</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="black-album.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Black album</h5>
+                              <h6>Metallica</h6>
+                              <p class="card-text">Thrash Metal</p>
+                              <p class="card-text">62:31</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="ace-of-spades.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Ace of Spades</h5>
+                              <h6>Motorhead</h6>
+                              <p class="card-text">Heavy Metal</p>
+                              <p class="card-text">45:27</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="holy-diver.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Holy diver</h5>
+                              <h6>Dio</h6>
+                              <p class="card-text">Heavy Metal</p>
+                              <p class="card-text">41:29</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <div class="row">
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="pleasures-of-the-flesh.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Pleasures of the flesh</h5>
+                              <h6>Exodus</h6>
+                              <p class="card-text">Thrash Metal</p>
+                              <p class="card-text">46:15</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="reign-in-blood.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Reign in blood</h5>
+                              <h6>Slayer</h6>
+                              <p class="card-text">Thrash Metal</p>
+                              <p class="card-text">28:52</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="somewhere-in-time.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Somewhere in time</h5>
+                              <h6>Iron Maiden</h6>
+                              <p class="card-text">Heavy Metal</p>
+                              <p class="card-text">51:24</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="beneath-the-remains.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Beneath the remains</h5>
+                              <h6>Sepultura</h6>
+                              <p class="card-text">Thrash Metal</p>
+                              <p class="card-text">41:44</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <br>
+     <br>
+     <!--SEZIONE RECENSIONE ALBUM-->
+
+     <button class="btn btn-primary" onclick="mostra2()" style="width:100%">Best album</button>
+     <div class="container text-center mostra" id="second">
+          <h1>Best album: recensione</h1>
+          <!-- <img src="number-of-the-beast.jpg" class="img-fluid" alt="..."> -->
+
+          <div class="card text-center" style="width: 80rem;">
+               <img src="number-of-the-beast.jpg" class="card-img-top" alt="...">
+               <div class="card-body">
+                    <h5 class="card-title">The number of the beast</h5>
+                    <h6>Iron Maiden</h6>
+                    <p class="card-text">Heavy Metal</p>
+                    <p class="card-text">39:11</p>
+                    <a href="https://www.sentireascoltare.com/recensioni/iron-maiden-the-number-of-the-beast/"
+                    class="btn btn-primary">Leggi la recensione...</a>
+               </div>
+          </div>
+          <br>
+          <h5>Le canzoni dell'album</h5>
+          <br>
+          <table class="table text-center">
+
+               <thead>
+                    <tr>
+                         <th scope="col">#</th>
+                         <th scope="col">Titolo</th>
+                         <th scope="col">Durata</th>
+                         
+                    </tr>
+               </thead>
+
+               <tbody>
+                    <tr>
+                         <th scope="row">1</th>
+                         <td>Invaders</td>
+                         <td>3:22</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">2</th>
+                         <td>Children of the Damned</td>
+                         <td>4:33</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">3</th>
+                         <td>The Prisoner</td>
+                         <td>6:00</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">4</th>
+                         <td>22 Acacia Avenue</td>
+                         <td>6:38</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">5</th>
+                         <td>The Number of the Beast</td>
+                         <td>4:51</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">6</th>
+                         <td>Run to the Hills</td>
+                         <td>3:50</td>
+                    </tr>
+                    
+                    <tr>
+                         <th scope="row">7</th>
+                         <td>Gangland</td>
+                         <td>3:47</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">8</th>
+                         <td>Total Eclipse</td>
+                         <td>4:28</td>
+                    </tr>
+
+                    <tr>
+                         <th scope="row">9</th>
+                         <td>Hallowed Be Thy Name</td>
+                         <td>7:10</td>
+                    </tr>
+
+               </tbody>
+          </table>
+
+
+     </div>
+
+     
+     <br>
+     <br>
+     <!--SEZIONE PEGGIORI ALBUM-->
+     <button class="btn btn-primary" onclick="mostra3()" style="width:100%">Hall of shame</button>
+
+     <div id="third" class="mostra">
+     <h1 class="text-center" >Hall of shame</h1>
+     <h3 class="text-center">Gli album peggio riusciti della storia del metal</h3>
+
+     <div class="container text-center">
+
+          <div class="row">
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="lulu.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Lulu</h5>
+                              <h6>Metallica + Lou Reed</h6>
+                              <p class="card-text">Heavy Metal</p>
+                              <p class="card-text">87:04</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="st-anger.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">St. Anger</h5>
+                              <h6>Metallica</h6>
+                              <p class="card-text">Thrash Metal</p>
+                              <p class="card-text">75:03</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="Chocolate-Starfish-And-The-Hot.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Chocolate Starfish and the Hot Dog Flavored Water</h5>
+                              <h6>Limp Bizkit</h6>
+                              <p class="card-text">Rap Metal</p>
+                              <p class="card-text">75:02</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="illud-divinum-insanus.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Illud Divinum Insanus</h5>
+                              <h6>Morbid Angel</h6>
+                              <p class="card-text">Death Metal</p>
+                              <p class="card-text">56:40</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <div class="row">
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="smells-like-children.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Smells like children</h5>
+                              <h6>Marilyn Manson</h6>
+                              <p class="card-text">Industrial Metal</p>
+                              <p class="card-text">54:52</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="significant-other.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Significant other</h5>
+                              <h6>Limp Bizkit</h6>
+                              <p class="card-text">Alternative Metal</p>
+                              <p class="card-text">62:47</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="slipknot.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Slipknot</h5>
+                              <h6>Slipknot</h6>
+                              <p class="card-text">Heavy Metal</p>
+                              <p class="card-text">58:05</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="card" style="width: 18rem;">
+                         <img src="risk.jpg" class="card-img-top" alt="...">
+                         <div class="card-body">
+                              <h5 class="card-title">Risk</h5>
+                              <h6>Megadeth</h6>
+                              <p class="card-text">Hard rock</p>
+                              <p class="card-text">51:32</p>
+                              <a href="#" class="btn btn-primary">Leggi la recensione...</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>
+
+     <br>
+     <br>
+
+     <!--SEZIONE COPERTINE ALBUM PIU' ASCOLTATI-->
+<button class="btn btn-primary" onclick="mostra4()" style="width:100%">I più ascoltati</button>
+<div id="fourth" class="mostra">
+          <h1 class="text-center" id="fourth">I più ascoltati</h1>
+          <h3 class="text-center">24 album scelti</h3>
+
+          <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+               aria-expanded="false" aria-controls="collapseExample">
+               Button with data-target
+          </button> -->
+     
+     <br>
+
+     <div class="collapsein" id="collapseExample">
+
+          <div class="row">
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="piece-of-mind.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="black-album.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="holy-diver.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="beneath-the-remains.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="pleasures-of-the-flesh.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="kill-em-all.png">
+               </div>
+
+          </div>
+
+          <div class="row">
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="british-steel.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="paranoid.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="eternal-nightmare.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="cowboys-from-hell.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="persecution-mania.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="bomber.jpg">
+               </div>
+
+          </div>
+
+          <div class="row">
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="pleasure to kill.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="peace-sells.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="arise.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="the-legacy.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="south-of-heaven.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="unleashed-in-the-east.jpg">
+               </div>
+
+          </div>
+
+          <div class="row">
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="metal-health.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="black-metal.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="among-the-living.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="vulgar-display.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="another-perfect-day.jpg">
+               </div>
+
+               <div class="col-2 g-0">
+                    <img class="img-fluid myimg" src="painkiller.jpg">
+               </div>
+
+          </div>
+
+     </div>
+</div>
+<br>
+<br>
+     <footer class="text-center" id="footer"></footer>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+          crossorigin="anonymous"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+          integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+          crossorigin="anonymous"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+          integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+          crossorigin="anonymous"></script>
+
+     <script>
+          
+          window.onload = function mostraNumero(){
+          let x = document.getElementsByTagName("img");
+          let y = Array.from(x);
+          let imgLength = y.length;
+          let z = document.getElementById("footer");
+          z.innerHTML = "Numero di album nella pagina = " + imgLength;
+          };
+
+          function mostra1(){
+               let x = document.getElementById("first");;
+               x.classList.toggle("mostra");
+          };
+
+          function mostra2(){
+               let y = document.getElementById("second");;
+               y.classList.toggle("mostra");
+          };
+
+          function mostra3(){
+               let z = document.getElementById("third");;
+               z.classList.toggle("mostra");
+          };
+
+          function mostra4(){
+               let a = document.getElementById("fourth");;
+               a.classList.toggle("mostra");
+          };
+
+     </script>
+
+</body>
+
+</html>
